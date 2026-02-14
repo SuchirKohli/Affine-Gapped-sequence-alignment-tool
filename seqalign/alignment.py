@@ -1,5 +1,5 @@
 """
-Smith-Waterman local alignment with affine gap penalties.
+Local alignment with affine gap penalties.
 
 Implements the three-matrix approach:
   H[i][j] = main scoring matrix
@@ -30,7 +30,7 @@ class AlignmentResult:
 
 
 def _score_func(a: str, b: str, match: float, mismatch: float) -> float:
-    """Return the match/mismatch score for two nucleotides."""
+    """Returns the match/mismatch score for two nucleotides."""
     return match if a == b else mismatch
 
 
@@ -76,7 +76,7 @@ def smith_waterman(
 
     NEG_INF = float("-inf")
 
-    # ── Initialise matrices ─────────────────────────────────────────────
+    # Initialise matrices 
     H = np.zeros((n + 1, m + 1), dtype=np.float64)   # main scoring matrix
     E = np.full((n + 1, m + 1), NEG_INF, dtype=np.float64)  # gap in seq1
     F = np.full((n + 1, m + 1), NEG_INF, dtype=np.float64)  # gap in seq2
@@ -89,7 +89,7 @@ def smith_waterman(
 
     traceback = np.zeros((n + 1, m + 1), dtype=np.int8)
 
-    # ── Fill matrices ───────────────────────────────────────────────────
+    # Fill matrices 
     max_score = 0.0
     max_i, max_j = 0, 0
 
@@ -112,7 +112,7 @@ def smith_waterman(
                 F[i - 1, j] + gap_ext,
             )
 
-            # H: main matrix – local alignment, so minimum is 0
+            # H: main matrix (local alignment, so minimum is 0)
             H[i, j] = max(0, diag_score, E[i, j], F[i, j])
 
             # Traceback pointer
@@ -130,7 +130,7 @@ def smith_waterman(
                 max_score = H[i, j]
                 max_i, max_j = i, j
 
-    # ── Traceback ───────────────────────────────────────────────────────
+    # Traceback 
     aligned1 = []
     aligned2 = []
     i, j = max_i, max_j
@@ -149,7 +149,7 @@ def smith_waterman(
             aligned1.append("-")
             aligned2.append(seq2[j - 1])
             j -= 1
-        else:  # STOP
+        else:  
             break
 
     aligned1.reverse()
@@ -158,7 +158,7 @@ def smith_waterman(
     aligned_seq1 = "".join(aligned1)
     aligned_seq2 = "".join(aligned2)
 
-    # ── Compute statistics ──────────────────────────────────────────────
+    # Computing statistics
     alignment_length = len(aligned_seq1)
     matches = sum(
         1 for a, b in zip(aligned_seq1, aligned_seq2) if a == b and a != "-"
