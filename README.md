@@ -33,6 +33,7 @@ A simple linear gap penalty treats every gap position equally. In biology, howev
 ## Project Structure
 
 ```
+├── run_alignment.py           # Interactive CLI (main entry point)
 ├── seqalign/                  # Core Python package
 │   ├── __init__.py            # Package exports
 │   ├── fasta_parser.py        # FASTA file parsing & validation
@@ -62,6 +63,50 @@ conda activate seqalign
 ```
 
 ## Usage
+
+### Interactive CLI (Recommended)
+
+The tool prompts you for **all inputs** — FASTA file paths and scoring parameters:
+
+```bash
+python run_alignment.py
+```
+
+You will be asked for:
+1. **Path to FASTA file 1**
+2. **Path to FASTA file 2**
+3. **Match score** (default: 5)
+4. **Mismatch penalty** (default: -4)
+5. **Gap opening penalty** (default: -12)
+6. **Gap extension penalty** (default: -2)
+
+Example session:
+```
+============================================================
+  SeqAlign — Nucleotide Sequence Alignment Tool
+  Smith-Waterman | Affine Gap Penalties
+============================================================
+
+Path to FASTA file 1: examples/seq1.fasta
+Path to FASTA file 2: examples/seq2.fasta
+
+--- Scoring Parameters ---
+  (Press Enter to use the default value)
+
+  Match score [5.0]: 5
+  Mismatch penalty [-4.0]: -4
+  Gap opening penalty [-12.0]: -12
+  Gap extension penalty [-2.0]: 0
+
+Parsing FASTA files...
+  Seq1: Seq1_Human_BRCA1_exon (186 bp)
+  Seq2: Seq2_Mouse_Brca1_exon (186 bp)
+
+Aligning sequences...
+  Parameters: match=5.0, mismatch=-4.0, gap_open=-12.0, gap_ext=0.0
+
+(alignment output follows...)
+```
 
 ### In Python
 
