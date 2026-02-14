@@ -1,7 +1,7 @@
 """
 SeqAlign - Nucleotide Sequence Alignment Tool
 
-A modular Python package for pairwise nucleotide sequence alignment
+A Python package for pairwise nucleotide sequence alignment
 using the Smith-Waterman algorithm with affine gap penalties.
 """
 
