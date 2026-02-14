@@ -9,9 +9,8 @@ def format_alignment(result: AlignmentResult, line_width: int = 60) -> str:
     """
     Format an AlignmentResult into a human-readable string.
 
-    The output resembles LALIGN-style alignment blocks with position
-    numbers, a midline showing matches (|), mismatches (.), and
-    gaps ( ), and summary statistics.
+    The output shows position numbers, a midline showing matches (|), 
+    mismatches (.), and gaps ( ), and summary statistics.
 
     Parameters
     ----------
@@ -27,7 +26,7 @@ def format_alignment(result: AlignmentResult, line_width: int = 60) -> str:
     """
     lines = []
 
-    # ── Header ──────────────────────────────────────────────────────────
+    # Header
     lines.append("=" * 70)
     lines.append("  LOCAL ALIGNMENT (Smith-Waterman, Affine Gap Penalties)")
     lines.append("=" * 70)
@@ -51,7 +50,7 @@ def format_alignment(result: AlignmentResult, line_width: int = 60) -> str:
     lines.append("-" * 70)
     lines.append("")
 
-    # ── Build midline ───────────────────────────────────────────────────
+    # Build midline
     midline = []
     for a, b in zip(result.aligned_seq1, result.aligned_seq2):
         if a == b and a != "-":
@@ -62,7 +61,7 @@ def format_alignment(result: AlignmentResult, line_width: int = 60) -> str:
             midline.append(".")
     midline_str = "".join(midline)
 
-    # ── Print in blocks ─────────────────────────────────────────────────
+    # Print in blocks
     pos1 = result.start_seq1  # current position in seq1
     pos2 = result.start_seq2  # current position in seq2
 
