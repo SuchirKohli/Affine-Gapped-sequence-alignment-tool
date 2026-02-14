@@ -34,7 +34,7 @@ def main():
     print("=" * 60)
     print()
 
-    # ── Input 1: FASTA files ────────────────────────────────────────
+    # Input 1: FASTA files
     file1 = input("Path to FASTA file 1: ").strip()
     if not os.path.isfile(file1):
         print(f"Error: File '{file1}' not found.")
@@ -45,7 +45,7 @@ def main():
         print(f"Error: File '{file2}' not found.")
         sys.exit(1)
 
-    # ── Input 2: Scoring parameters ─────────────────────────────────
+    # Input 2: Scoring parameters
     print("\n--- Scoring Parameters ---")
     print("  (Press Enter to use the default value)\n")
 
@@ -54,7 +54,7 @@ def main():
     gap_open = get_float("  Gap opening penalty",  default=-12.0)
     gap_ext  = get_float("  Gap extension penalty", default=-2.0)
 
-    # ── Parse sequences ─────────────────────────────────────────────
+    # Parse sequences
     print("\nParsing FASTA files...")
     try:
         header1, seq1 = parse_fasta(file1)
@@ -66,7 +66,7 @@ def main():
     print(f"  Seq1: {header1} ({len(seq1)} bp)")
     print(f"  Seq2: {header2} ({len(seq2)} bp)")
 
-    # ── Align ───────────────────────────────────────────────────────
+    # Align
     print("\nAligning sequences...")
     print(f"  Parameters: match={match}, mismatch={mismatch}, "
           f"gap_open={gap_open}, gap_ext={gap_ext}")
@@ -80,7 +80,7 @@ def main():
         gap_ext=gap_ext,
     )
 
-    # ── Display ─────────────────────────────────────────────────────
+    # Display
     print(format_alignment(result))
 
 
